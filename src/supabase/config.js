@@ -1,7 +1,5 @@
-// import { Client,Account,  ID, Databases, Storage } from "appwrite";
 import { v4 as uuidv4 } from "uuid";
 import conf from "../conf/conf";
-
 import { createClient } from "@supabase/supabase-js";
 
 class Service {
@@ -17,26 +15,26 @@ class Service {
         .from("urlCard")
         .insert([
           {
-            created_at: created_at,
-            url: url,
-            title: title,
-            userId: userId,
-            iconUrl: iconUrl,
-            id:id,
-            tag: tag
+            created_at,
+            url,
+            title,
+            userId,
+            iconUrl,
+            id,
+            tag
           },
         ])
         .select();
-      console.log('error:: ', error)
+      console.log('error:', error);
       return data;
     } catch (error) {
       console.log("Appwrite service :: addUrl :: error", error);
     }
   }
+
   async deleteUrl(id) {
     try {
       const { error } = await this.supabase.from("urlCard").delete().eq("id", id);
-
       return true;
     } catch (error) {
       console.log("Appwrite service :: deleteUrl :: error", error);
@@ -44,11 +42,12 @@ class Service {
     }
   }
 
-  async getUrls() {
+  async getUrls({ userId }) {
     try {
-      let { data: url_cards, error } = await this.supabase
+      const { data: url_cards, error } = await this.supabase
         .from("urlCard")
-        .select("*");
+        .select("*")
+        .eq("userId", userId);
 
       return url_cards;
     } catch (error) {
@@ -61,12 +60,12 @@ class Service {
       const { data, error } = await this.supabase
         .from("urlCard")
         .update({
-          url: url,
-          title: title,
-          userId: userId,
+          url,
+          title,
+          userId,
           created_at: save_date,
-          iconUrl: iconUrl,
-          tag: tag
+          iconUrl,
+          tag
         })
         .eq("id", id)
         .select();
@@ -75,46 +74,15 @@ class Service {
     }
   }
 
-
-  // Creating function to fetch tags
-
   async getTags() {
     try {
-      let { data: tags, error } = await this.supabase.from("urlCard").select("tag");
-
+      const { data: tags, error } = await this.supabase.from("urlCard").select("tag");
       console.log(error);
       return tags;
-      
     } catch (error) {
       console.log("Appwrite service :: getTags :: error", error);
     }
   }
-
-  // creating methods for uploading and deleting files
-
-  //   async uploadFile(file) {
-  //     try {
-  //       return await this.storage.createFile(
-  //         conf.appwrite_bucketId,
-  //         ID.unique(),
-  //         file
-  //       );
-  //     } catch (error) {
-  //       console.log("Appwrite service :: uploadFile :: error", error);
-  //       return false;
-  //     }
-  //   }
-
-  //   async deleteFile(id) {
-  //     try {
-  //       await this.storage.deleteFile(conf.appwrite_bucketId, id);
-
-  //       return true;
-  //     } catch (error) {
-  //       console.log("Appwrite service :: deleteFile :: error", error);
-  //       return false;
-  //     }
-  //   }
 }
 
 const service = new Service();

@@ -21,7 +21,7 @@ function Home() {
   }, [status, navigate]);
 
   useEffect(() => {
-    if (status) {
+    if (status && userData) {
       service.getUrls({ userId: userData.id }).then((response) => {
         dispatch(setUrls(response));
       });

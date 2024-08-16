@@ -21,7 +21,9 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: (
+          <Authprotect authentication={true}>
             <Home />
+          </Authprotect>
         )
       },
       {

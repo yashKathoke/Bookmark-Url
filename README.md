@@ -1,8 +1,22 @@
-# React + Vite
+# Bookmark Url
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+***Simple but Productive.***
 
-Currently, two official plugins are available:
+Bookmark Url is a web application built with React and Vite that allows users to save and manage their favorite URLs. This project leverages modern web development tools and practices, including Tailwind CSS for styling and Supabase for backend services.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **User Authentication**: Secure user authentication with protected routes.
+- **URL Management**: Add, edit, and delete URLs with ease.
+- **Tagging System**: Organize URLs with custom tags.
+- **Responsive Design**: Fully responsive design using Tailwind CSS.
+- **Fast Refresh**: Instant feedback during development with Vite's HMR.
+
+## Technologies Used
+
+- **React**: A JavaScript library for building user interfaces.
+- **Vite**: A build tool that provides a fast development environment.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Supabase**: An open-source Firebase alternative for backend services.
+- **ESLint**: A tool for identifying and fixing linting issues in JavaScript code.
+

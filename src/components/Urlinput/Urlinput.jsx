@@ -111,19 +111,14 @@ function URLInput() {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const data = await service.getTags({userId:userData.id});
+        const data = await service.getTags();
         dispatch(setTags(data));
       } catch (error) {
         console.error('Error fetching tags:', error);
       }
     };
-    
-    if (userData) {
-      // console.log(userData.id);
-      
-      fetchTags();
 
-    }
+    fetchTags();
   }, []);
 
   return (

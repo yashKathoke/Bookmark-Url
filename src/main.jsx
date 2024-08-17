@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import {store, persistor} from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home, Login, Signup} from './Pages'
+import {Home, Login, Signup, NotFound} from './Pages'
 import Authprotect from './components/Authprotect.jsx'
 
 

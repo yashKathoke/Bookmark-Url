@@ -13,40 +13,21 @@ function Signup() {
     const [error, setError] = useState("")
 
 
-    // const SignupHandle = async (data) => {
-    //     setError("")
-    //     try {
-    //         const userData = await authService.createAccount({...data})
-    //         console.log(userData);
-            
-    //         if (userData) {
-    //             // const data = await authService.getAccount()
-    //             dispatch(login(userData))
-    //             // console.log(data);
-                
-    //             const newData = useSelector(state => state.status)
-    //             console.log(newData)
-    //             navigate('/')
-    //         }
-    //     } catch (error) {
-    //         setError(error.message)
-    //     }
-    // }
 
     const SignupHandle = async(data)=> {
         setError("")
         try {
-            console.log(data);
+            // console.log(data);
             
             const userData = await authService.createAccount({...data})
-            console.log(userData);
+            // console.log(userData);
             
             const udata = await authService.getAccount()
             
             if (udata) {
                 if (udata) dispatch(login(udata));
                 // const userData = authService.getAccount()
-                console.log(userData);
+                // console.log(userData);
                 navigate('/')
             }
             

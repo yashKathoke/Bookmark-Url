@@ -22,7 +22,7 @@ function Login() {
             // console.log(data);
             
             const session = await authService.login({...data});
-            console.log(session);
+            // console.log(session);
             
 
             if (session) {

@@ -27,6 +27,9 @@ function Login() {
             if (session) {
                 const userData = await authService.getAccount();
                 if(userData) dispatch(authLogin(userData));
+            }
+            if (error === ""){
+
                 navigate("/");
             }
 

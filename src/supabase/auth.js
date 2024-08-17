@@ -27,8 +27,8 @@ class AuthService {
                 password,
             });
             console.log('Login error:', error);
-            const user = data.user;
-            return { user, error };
+            const session = data.user;
+            return { session, error };
         } catch (error) {
             throw error;
             

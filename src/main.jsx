@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import {store, persistor} from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home, Login, Signup} from './Pages'
+import {Home, Login, Signup, NotFound} from './Pages'
 import Authprotect from './components/Authprotect.jsx'
 
 
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
         path: '/',
         element: (
           <Authprotect authentication={true}>
-            <Home />
-          </Authprotect>
+          <Home />
+        </Authprotect>
         )
       },
       {
@@ -46,13 +46,8 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:'/login',
-    element: <Login />
-  
-  },
-  {
-    path:'/signup',
-    element: <Signup />
+    path:'/*',
+    element: <NotFound />
   }
 ])
 

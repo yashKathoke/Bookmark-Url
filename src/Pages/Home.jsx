@@ -26,7 +26,7 @@ function Home() {
         dispatch(setUrls(response));
       });
     }
-  }, [status, dispatch]);
+  }, [status, userData.id, dispatch]);
 
   if (status) {
     return (

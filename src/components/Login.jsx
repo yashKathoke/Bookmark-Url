@@ -14,12 +14,34 @@ function Login() {
     const [error, setError] = useState("")
 
 
+    // const login = async (data) => {
+    //     setError("")
+    //     try {
+    //         console.log(data);
+
+    //         const session = await authService.login(data);
+    //         console.log(session);
+            
+
+    //         if (session) {
+    //             const userData = await authService.getAccount()
+
+    //             dispatch(login(userData))
+    //             console.log(userData)
+                
+    //         }   
+    //         navigate('/')
+            
+    //     } catch (error) {
+    //         setError(error.message)
+    //     }
+    // }
 
     const login = async (data) => {
         setError("");
 
         try {
-            // console.log(data);
+            console.log(data);
             
             const session = await authService.login({...data});
             // console.log(session);
@@ -28,8 +50,8 @@ function Login() {
             if (session) {
                 const userData = await authService.getAccount();
 
-                if(userData)dispatch(authLogin(userData));
-                // console.log(userData)
+                dispatch(authLogin(userData))
+                console.log(userData)
                 
             }
             navigate("/");

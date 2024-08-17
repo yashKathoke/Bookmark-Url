@@ -27,9 +27,11 @@ class AuthService {
                 password,
             });
             console.log('Login error:', error);
-            return data.user;
+            const user = data.user;
+            return { user, error };
         } catch (error) {
             throw error;
+            
         }
     }
 

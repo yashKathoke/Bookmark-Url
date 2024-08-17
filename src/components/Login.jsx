@@ -1,42 +1,51 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Input, Button } from './index'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import  authService  from '../supabase/auth'
-import { login as authLogin}  from '../store/authSlice'
+import authService from '../supabase/auth'
+import { login as authLogin } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 function Login() {
-    const { control, handleSubmit } = useForm()
+    const { control, handleSubmit, watch } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [error, setError] = useState("")
-
-
 
     const login = async (data) => {
         setError("");
 
         try {
-            // console.log(data);
-            
-            const session = await authService.login({...data});
-            // console.log(session);
-            
+            const {session, error} = await authService.login({...data});
+            if (error) {
+                // console.log(error.message);
+                
+                setError(error.message);
+            }
 
             if (session) {
                 const userData = await authService.getAccount();
-
-                if(userData)dispatch(authLogin(userData));
-                // console.log(userData)
-                
+                if(userData) dispatch(authLogin(userData));
+                navigate("/");
             }
-            navigate("/");
+
+            
         } catch (error) {
+            // console.log(error);
+            
             setError(error.message)
         }
     };
+
+    useEffect(() => {
+        const subscription = watch((value, { name, type }) => {
+            if (error && (name === 'email' || name === 'password')) {
+                setError("")
+            }
+        })
+        return () => subscription.unsubscribe()
+    }, [watch, error])
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -48,6 +57,11 @@ function Login() {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                {error && (
+                        <div className="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                            {error}
+                        </div>
+                    )}
                     <form className="space-y-6" onSubmit={handleSubmit(login)}>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -88,8 +102,7 @@ function Login() {
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 login
-                                </Button>
-
+                            </Button>
                         </div>
 
                         <div>
@@ -104,9 +117,7 @@ function Login() {
                 </div>
             </div>
         </div>
-
     );
 }
-
 
 export default Login;

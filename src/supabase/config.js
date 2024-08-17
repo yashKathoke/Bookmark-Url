@@ -74,9 +74,9 @@ class Service {
     }
   }
 
-  async getTags() {
+  async getTags({userId}) {
     try {
-      const { data: tags, error } = await this.supabase.from("urlCard").select("tag");
+      const { data: tags, error } = await this.supabase.from("urlCard").select("tag").eq("userId", userId);
       console.log(error);
       return tags;
     } catch (error) {

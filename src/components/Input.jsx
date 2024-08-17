@@ -18,7 +18,7 @@ function Input({
             <Controller
             control={control}
             name= {name? name : "url"}
-            render={({ field: {onChange, value}, fieldState }) => (
+            render={({ field: {onChange, value =""}, fieldState }) => (
 
                 <input 
                 type={type}

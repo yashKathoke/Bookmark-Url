@@ -13,7 +13,7 @@ const ListUrls = ({ urls = [] }) => {
   const filteredUrls = tag === 'all' ? urls : urls.filter((url) => url.tag === tag);
 
   const handleDelete = (id) => {
-    console.log('id:: ', id);
+    // console.log('id:: ', id);
     service.deleteUrl(id);
     dispatch(deleteUrl(id));
   };
